@@ -40,12 +40,12 @@ function FileNode({ data, selected }: { data: { node: GraphNode; selected: boole
 
   return (
     <div
-      className={`rounded-xl border p-3 bg-raised shadow-sm transition-all duration-200 cursor-pointer ${
+      className={`rounded-[14px] border p-3 bg-raised transition-all duration-200 cursor-pointer ${
         isSelected
-          ? 'ring-1 ring-accent border-accent'
+          ? 'ring-2 ring-accent border-accent bg-accent-soft shadow-[0_4px_12px_rgb(60_40_110/0.12),0_2px_4px_rgb(43_28_23/0.05)]'
           : isHighlighted
-          ? 'ring-1 ring-accent/50 border-accent/50'
-          : 'border-line hover:border-accent/50 hover:shadow-md'
+          ? 'ring-1 ring-accent/60 border-accent/60'
+          : 'border-line-strong shadow-[0_1px_2px_rgb(60_40_110/0.07),0_1px_1px_rgb(43_28_23/0.04)] hover:border-accent/60 hover:shadow-[0_4px_12px_rgb(60_40_110/0.1),0_2px_4px_rgb(43_28_23/0.04)]'
       }`}
       style={{ width: NODE_WIDTH, height: NODE_HEIGHT }}
       role="button"
@@ -60,7 +60,7 @@ function FileNode({ data, selected }: { data: { node: GraphNode; selected: boole
       <div className="flex items-start gap-2 mb-1">
         <span className="h-2 w-2 rounded-full" style={{ background: langColor }} />
         {endpoint && (
-          <span className="text-[10px] font-bold text-accent uppercase tracking-tighter px-1.5 py-0.5 rounded bg-accent/10">
+          <span className="text-[10px] font-bold text-accent uppercase tracking-tighter px-1.5 py-0.5 rounded-full bg-accent-soft">
             endpoint
           </span>
         )}
@@ -72,9 +72,9 @@ function FileNode({ data, selected }: { data: { node: GraphNode; selected: boole
       <div className="mt-auto flex items-center justify-between pt-2 border-t border-line/50">
         <span className="text-[10px] uppercase tracking-wider text-faint">{node.language}</span>
         <div className="flex gap-1">
-          {isEntry && <span className="text-[10px] bg-accent text-accent-ink px-1.5 py-0.5 rounded">ENTRY</span>}
-          {isHub && <span className="text-[10px] bg-warn/15 text-warn border border-warn/40 px-1.5 py-0.5 rounded">HUB</span>}
-          {isBig && <span className="text-[10px] bg-bad/10 text-bad border border-bad/40 px-1.5 py-0.5 rounded">BIG</span>}
+          {isEntry && <span className="text-[10px] font-bold bg-ink text-paper px-1.5 py-0.5 rounded-full">ENTRY</span>}
+          {isHub && <span className="text-[10px] font-bold bg-warn/10 text-warn border border-warn/30 px-1.5 py-0.5 rounded-full">HUB</span>}
+          {isBig && <span className="text-[10px] font-bold bg-bad/10 text-bad border border-bad/30 px-1.5 py-0.5 rounded-full">BIG</span>}
         </div>
       </div>
     </div>
@@ -83,10 +83,10 @@ function FileNode({ data, selected }: { data: { node: GraphNode; selected: boole
 
 function GroupNode({ data }: { data: { label: string; count: number } }) {
   return (
-    <div className="h-full w-full rounded-xl border border-line bg-surface/60 px-3 pt-2 pb-1">
+    <div className="h-full w-full rounded-[20px] border border-violet-200 bg-violet-50/70 px-3 pt-2 pb-1 dark:border-[#3d3460] dark:bg-[#241d3d]/70">
       <div className="flex items-center gap-2">
-        <span className="text-[13px] font-semibold tracking-tight text-ink">{data.label}</span>
-        <span className="rounded-full border border-line bg-raised px-2 py-0.5 text-[11px] font-medium text-muted">
+        <span className="font-display text-[14px] font-semibold tracking-tight text-ink">{data.label}</span>
+        <span className="rounded-full border border-line-strong bg-raised px-2 py-0.5 text-[11px] font-semibold text-muted shadow-sm">
           {data.count} files
         </span>
       </div>
@@ -298,9 +298,9 @@ function GraphMapInner({ map, graph, dark }: GraphMapProps) {
         return {
           ...e,
           style: {
-            stroke: isActive ? (dark ? '#2f81f7' : '#0969da') : (dark ? '#5b6b7f' : '#8b98a9'),
+            stroke: isActive ? (dark ? '#a996f5' : '#6a52d9') : (dark ? '#4d4272' : '#b9aee8'),
             strokeWidth: isActive ? 2 : 1.5,
-            opacity: isActive ? 1 : 0.85,
+            opacity: isActive ? 1 : 0.9,
           },
           animated: isActive,
           markerEnd: MarkerType.Arrow,
@@ -407,16 +407,16 @@ function GraphMapInner({ map, graph, dark }: GraphMapProps) {
   return (
     <div className="flex flex-col h-full">
       <div className="px-4 pt-4">
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <MapPin className="h-4 w-4 text-accent" />
             <h3 className="text-base font-semibold text-ink">Dependency graph</h3>
           </div>
           <div className="flex items-center gap-2">
-            <button onClick={onFitView} className="rounded-md border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink hover:bg-raised transition-colors">
+            <button onClick={onFitView} className="shrink-0 whitespace-nowrap rounded-full border border-line-strong bg-raised px-3.5 py-1.5 text-sm font-semibold text-ink shadow-sm hover:bg-accent-soft transition-colors">
               Fit view
             </button>
-            <button onClick={onTourStart} className="rounded-md border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink hover:bg-raised transition-colors">
+            <button onClick={onTourStart} className="shrink-0 whitespace-nowrap rounded-full border border-line-strong bg-raised px-3.5 py-1.5 text-sm font-semibold text-ink shadow-sm hover:bg-accent-soft transition-colors">
               Start tour
             </button>
           </div>
@@ -428,7 +428,7 @@ function GraphMapInner({ map, graph, dark }: GraphMapProps) {
             onChange={onSearchChange}
             onKeyDown={(e) => { if (e.key === 'Enter') onSearchEnter(); }}
             placeholder="Search files or descriptions…"
-            className="w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-faint focus:border-accent focus:outline-none"
+            className="input w-full"
           />
           {searchQuery && (
             <button onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-faint hover:text-ink">
@@ -451,19 +451,19 @@ function GraphMapInner({ map, graph, dark }: GraphMapProps) {
                 <button
                   disabled={tourStep === 0}
                   onClick={onTourPrev}
-                  className="rounded-md border border-line bg-surface px-2.5 py-1 text-sm text-ink disabled:opacity-50 disabled:cursor-not-allowed hover:bg-raised transition-colors"
+                  className="rounded-full border border-line-strong bg-raised px-2.5 py-1 text-sm text-ink shadow-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-accent-soft transition-colors"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <button
                   onClick={onTourNext}
-                  className="rounded-md bg-accent px-2.5 py-1 text-sm font-semibold text-white hover:opacity-90 transition-colors"
+                  className="rounded-full bg-ink px-2.5 py-1 text-sm font-bold text-paper hover:opacity-90 transition-colors"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </button>
               </div>
             </div>
-            <div className="mt-2 h-1.5 bg-surface rounded-full overflow-hidden">
+            <div className="mt-2 h-1.5 bg-violet-100 dark:bg-[#332a5e] rounded-full overflow-hidden">
               <div
                 className="h-full bg-accent transition-all duration-300"
                 style={{ width: `${((tourStep + 1) / map.startHere.length) * 100}%` }}
@@ -496,7 +496,7 @@ function GraphMapInner({ map, graph, dark }: GraphMapProps) {
               variant={dark ? BackgroundVariant.Cross : BackgroundVariant.Dots}
               gap={dark ? 16 : 24}
               size={dark ? 1 : 2}
-              color={dark ? '#30363d' : '#d1d9e0'}
+              color={dark ? '#3d3460' : '#ddd3f5'}
             />
             <Controls />
             {/* Minimap only on tablet/desktop — at 360px it covers the nodes.
@@ -509,18 +509,22 @@ function GraphMapInner({ map, graph, dark }: GraphMapProps) {
                 zoomable={false}
                 position="bottom-right"
                 nodeColor={(node) =>
-                  node.type === 'groupNode' ? 'rgba(148,163,184,0.22)' : '#2563eb'
+                  node.type === 'groupNode'
+                    ? 'rgba(201,188,255,0.4)'
+                    : dark ? '#a996f5' : '#6a52d9'
                 }
                 nodeStrokeColor={(node) =>
-                  node.type === 'groupNode' ? 'rgba(148,163,184,0.55)' : '#2563eb'
+                  node.type === 'groupNode'
+                    ? 'rgba(122,100,224,0.6)'
+                    : dark ? '#a996f5' : '#6a52d9'
                 }
-                bgColor={dark ? '#0d1117' : '#ffffff'}
-                maskColor={dark ? 'rgba(13,17,23,0.55)' : 'rgba(255,255,255,0.5)'}
+                bgColor={dark ? '#171226' : '#fffdf8'}
+                maskColor={dark ? 'rgba(23,18,38,0.55)' : 'rgba(255,253,248,0.5)'}
                 style={{
                   width: 168,
                   height: 112,
-                  borderRadius: 8,
-                  border: `1px solid ${dark ? '#30363d' : '#d1d9e0'}`,
+                  borderRadius: 14,
+                  border: `1px solid ${dark ? '#4d4272' : '#d9ccd5'}`,
                   overflow: 'hidden',
                 }}
               />
@@ -528,9 +532,9 @@ function GraphMapInner({ map, graph, dark }: GraphMapProps) {
           </ReactFlow>
         </div>
         {panelOpen && selectedFile && selectedGraphNode && (
-          <aside className="md:w-96 border-l border-line bg-raised shadow-lg flex flex-col h-full">
+          <aside className="md:w-96 border-l border-line-strong bg-paper shadow-[0_18px_40px_rgb(60_40_110/0.16)] flex flex-col h-full">
             <div className="p-4 border-b border-line flex items-center justify-between">
-              <button onClick={() => setPanelOpen(false)} className="rounded-md text-faint hover:text-ink hover:bg-surface p-1.5">
+              <button onClick={() => setPanelOpen(false)} className="rounded-full text-faint hover:text-ink hover:bg-accent-soft p-1.5">
                 <span className="sr-only">Close detail</span>
                 <X className="h-4 w-4" />
               </button>
@@ -613,10 +617,10 @@ function GraphMapInner({ map, graph, dark }: GraphMapProps) {
                     reactFlowInstance.fitView({ nodes: [{ id: partNodes[0].path }], duration: 300, maxZoom: 1.2 });
                   }
                 }}
-                className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-md border px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold shadow-sm transition-colors ${
                   isHighlighted
-                    ? 'bg-accent-soft border-accent text-accent'
-                    : 'bg-surface border-line text-ink hover:bg-raised'
+                    ? 'bg-ink border-ink text-paper'
+                    : 'bg-raised border-line-strong text-ink hover:bg-accent-soft'
                 }`}
               >
                 <span className="h-2 w-2 rounded-full shrink-0" style={{ background: LANG_COLORS[part.files[0]?.language ?? ''] ?? '#8a949e' }} />
