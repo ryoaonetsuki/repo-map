@@ -97,28 +97,28 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
             </h2>
             {map.meta.description && <p className="mt-1 max-w-2xl text-[15px] text-muted">{map.meta.description}</p>}
             <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
-              <div className="flex items-center gap-2 p-2 rounded-md border border-line bg-surface">
+              <div className="flex items-center gap-2 p-2 rounded-[14px] border border-line bg-surface shadow-sm">
                 <Star className="h-4 w-4 text-accent" />
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-faint">Stars</p>
                   <p className="text-sm font-semibold text-ink">{fmt(map.meta.stars)}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 p-2 rounded-md border border-line bg-surface">
+              <div className="flex items-center gap-2 p-2 rounded-[14px] border border-line bg-surface shadow-sm">
                 <GitFork className="h-4 w-4 text-accent" />
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-faint">Forks</p>
                   <p className="text-sm font-semibold text-ink">{fmt(map.meta.forks)}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 p-2 rounded-md border border-line bg-surface">
+              <div className="flex items-center gap-2 p-2 rounded-[14px] border border-line bg-surface shadow-sm">
                 <FileCode2 className="h-4 w-4 text-accent" />
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-faint">Files</p>
                   <p className="text-sm font-semibold text-ink">{map.totalFiles.toLocaleString()}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 p-2 rounded-md border border-line bg-surface">
+              <div className="flex items-center gap-2 p-2 rounded-[14px] border border-line bg-surface shadow-sm">
                 <Scale className="h-4 w-4 text-accent" />
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-faint">Size</p>
@@ -126,7 +126,7 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
                 </div>
               </div>
               {map.meta.license && (
-                <div className="flex items-center gap-2 p-2 rounded-md border border-line bg-surface">
+                <div className="flex items-center gap-2 p-2 rounded-[14px] border border-line bg-surface shadow-sm">
                   <Code2 className="h-4 w-4 text-accent" />
                   <div>
                     <p className="text-[10px] uppercase tracking-wider text-faint">Licence</p>
@@ -135,7 +135,7 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
                 </div>
               )}
               {map.meta.language && (
-                <div className="flex items-center gap-2 p-2 rounded-md border border-line bg-surface">
+                <div className="flex items-center gap-2 p-2 rounded-[14px] border border-line bg-surface shadow-sm">
                   <Code2 className="h-4 w-4 text-accent" />
                   <div>
                     <p className="text-[10px] uppercase tracking-wider text-faint">Main language</p>
@@ -147,7 +147,7 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
             {map.frameworks.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
                 {map.frameworks.map((f) => (
-                  <span key={f} className="rounded-md border border-line bg-surface px-3 py-1 text-xs font-medium text-ink hover:bg-raised transition-colors">
+                  <span key={f} className="rounded-full border border-line-strong bg-surface px-3 py-1 text-xs font-semibold text-ink shadow-sm hover:bg-accent-soft transition-colors">
                     {f}
                   </span>
                 ))}
@@ -163,14 +163,14 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
           <div className="flex gap-2 sm:flex-col sm:items-start">
             <button
               onClick={() => copy(buildSummary(map), 'Summary copied.')}
-              className="flex items-center gap-2 rounded-md border border-line bg-surface px-3 py-2 text-sm font-medium text-ink hover:bg-raised transition-colors"
+              className="btn-ghost whitespace-nowrap"
             >
               <Copy className="h-4 w-4" />
               <span>Copy summary</span>
             </button>
             <button
               onClick={() => copy(shareUrl, 'Share link copied.')}
-              className="flex items-center gap-2 rounded-md bg-accent px-3 py-2 text-sm font-medium text-white hover:opacity-90 transition-colors"
+              className="btn-primary"
             >
               <Link className="h-4 w-4" />
               <span>Copy share link</span>
@@ -204,7 +204,7 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
           </div>
         )}
         {map.readmeExcerpt && (
-          <div className="mt-6 p-4 rounded-md border border-line bg-surface">
+          <div className="mt-6 p-4 rounded-[14px] border border-line-strong bg-surface">
             <p className="text-[10px] uppercase tracking-wider text-faint mb-2">Readme excerpt</p>
             <p className="text-sm text-muted italic">{map.readmeExcerpt}…</p>
           </div>
@@ -220,7 +220,7 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
           {map.startHere.map((s, i) => (
             <div key={s.path} className="relative flex gap-3">
               <div className="relative shrink-0 mt-0.5">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-white text-xs font-semibold z-10">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-paper text-xs font-bold z-10">
                   {i + 1}
                 </span>
               </div>
@@ -234,22 +234,22 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
         </div>
       </section>
 
-      <div className="mt-4 flex gap-1">
+      <div className="mt-4 inline-flex gap-1 rounded-full border border-line bg-surface p-1 shadow-sm">
         <button
           onClick={() => setTab('map')}
-          className={`px-3 py-2 text-sm font-medium rounded-md ${tab === 'map' ? 'bg-accent text-white' : 'text-muted hover:bg-surface'}`}
+          className={`px-4 py-1.5 text-sm font-bold rounded-full transition-colors ${tab === 'map' ? 'bg-ink text-paper' : 'text-muted hover:text-ink'}`}
         >
           Map
         </button>
         <button
           onClick={() => setTab('list')}
-          className={`px-3 py-2 text-sm font-medium rounded-md ${tab === 'list' ? 'bg-accent text-white' : 'text-muted hover:bg-surface'}`}
+          className={`px-4 py-1.5 text-sm font-bold rounded-full transition-colors ${tab === 'list' ? 'bg-ink text-paper' : 'text-muted hover:text-ink'}`}
         >
           List
         </button>
       </div>
       {tab === 'map' && (
-        <div className="mt-4 h-[70vh] min-h-[400px]">
+        <div className="graph-frame mt-4 h-[70vh] min-h-[400px]">
           <GraphMap map={map} graph={buildGraph(map)} dark={dark} />
         </div>
       )}
@@ -303,12 +303,12 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search files or descriptions…"
-            className="min-w-56 flex-1 rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-faint focus:border-accent focus:outline-none"
+            className="input min-w-56 flex-1 text-sm"
           />
           <select
             value={langFilter}
             onChange={(e) => setLangFilter(e.target.value)}
-            className="rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink focus:border-accent focus:outline-none"
+            className="h-10 rounded-[10px] border border-line-strong bg-raised px-3 text-sm text-ink outline-none focus:border-ink"
           >
             <option value="All">All languages</option>
             {languages.map((l) => (
@@ -319,7 +319,7 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
           </select>
         </div>
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
-          <div className="max-h-[480px] overflow-auto rounded-md border border-line">
+          <div className="max-h-[480px] overflow-auto rounded-[14px] border border-line-strong">
             {filtered.length === 0 && <p className="p-4 text-sm text-muted">Nothing matches that search.</p>}
             <ul>
               {filtered.slice(0, 300).map((f) => {
@@ -349,7 +349,7 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
               <p className="p-3 text-xs text-faint">Showing 300 of {filtered.length} matches — narrow the search.</p>
             )}
           </div>
-          <div className="rounded-md border border-line p-4">
+          <div className="rounded-[14px] border border-line-strong p-4">
             {selected ? (
               <div>
                 <div className="flex items-start gap-3 mb-3">
@@ -423,8 +423,8 @@ export default function Results({ map, dark }: { map: RepoMap; dark: boolean }) 
               <tbody>
                 {map.endpoints.map((e) => {
                   const methodStyles: Record<string, string> = {
-                    GET: 'bg-good/10 text-good border border-good/20',
-                    POST: 'bg-accent/10 text-accent border border-accent/20',
+                    GET: 'bg-good/10 text-good border border-good/30',
+                    POST: 'bg-accent-soft text-accent border border-accent/30',
                     PUT: 'bg-warn/10 text-warn border border-warn/20',
                     PATCH: 'bg-warn/10 text-warn border border-warn/20',
                     DELETE: 'bg-bad/10 text-bad border border-bad/20',
