@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * RepoMap Web design tokens.
+ * Borrowed principles from the solid-glass theme (solid panels, a hairline
+ * border, a line of light at the top edge, neutral faces — never a gradient
+ * across the face), restated here in a restrained GitHub-style palette:
+ * dark ink + one blue accent. No gradients, no glassmorphism.
+ */
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --radius: 8px;
+}
+
+:root {
+  --ink: #1f2328;
+  --muted: #59636e;
+  --faint: #8a949e;
+  --paper: #ffffff;
+  --surface: #f6f8fa;
+  --raised: #ffffff;
+  --line: #d1d9e0;
+  --accent: #0969da;
+  --accent-ink: #ffffff;
+  --accent-soft: #ddf4ff;
+  --good: #1a7f37;
+  --warn: #9a6700;
+  --bad: #cf222e;
+  color-scheme: light;
+}
+
+.dark {
+  --ink: #e6edf3;
+  --muted: #94a3b8;
+  --faint: #64748b;
+  --paper: #0b0e13;
+  --surface: #12161d;
+  --raised: #161b22;
+  --line: #2a333f;
+  --accent: #2f81f7;
+  --accent-ink: #ffffff;
+  --accent-soft: #12233f;
+  --good: #3fb950;
+  --warn: #d29922;
+  --bad: #f85149;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    margin: 0;
+  }
+  ::selection {
+    background: var(--accent-soft);
+  }
+  /* Solid-glass style panel: solid face, hairline border, light top edge. */
+  .panel {
+    background: var(--raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.6),
+      0 1px 2px rgb(31 35 40 / 0.06);
+  }
+  .dark .panel {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.05),
+      0 1px 2px rgb(0 0 0 / 0.3);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.1rem 0.55rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--muted);
+    background: var(--surface);
+    white-space: nowrap;
+  }
+  details > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.05s ease;
+    outline: none;
+  }
+  .btn-primary:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+  .btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  .btn-primary:focus-visible {
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    outline: none;
+  }
+  .btn-ghost:hover {
+    background: var(--raised);
+    border-color: var(--muted);
+  }
+  .btn-ghost:focus-visible {
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .input {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--raised);
+    color: var(--ink);
+    font-size: 0.9375rem;
+    padding: 0.625rem 0.875rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .input::placeholder {
+    color: var(--faint);
+  }
+  .input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-soft);
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--raised);
+    padding: 1.5rem;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  }
+  .dark .card {
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.2);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.1875rem 0.625rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+}
